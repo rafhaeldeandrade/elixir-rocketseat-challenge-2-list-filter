@@ -1,18 +1,15 @@
 defmodule ListFilter do
-  @moduledoc """
-  Documentation for `ListFilter`.
-  """
+  def call(list), do: odd_numbers_count(list)
 
-  @doc """
-  Hello world.
+  defp odd_numbers_count(list) do
+    number_list =
+      Enum.map(list, fn string ->
+        case Integer.parse(string) do
+          {int, _} -> int
+          :error -> 0
+        end
+      end)
 
-  ## Examples
-
-      iex> ListFilter.hello()
-      :world
-
-  """
-  def hello do
-    :world
+    Enum.count(number_list, fn elem -> rem(elem, 2) != 0 end)
   end
 end
